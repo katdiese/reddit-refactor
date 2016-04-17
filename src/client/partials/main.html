@@ -2,35 +2,36 @@
     <nav>
       <h1 class="appName">Reddit Clone</h1>
       <input class="searchField" type="text" ng-model="searchText" placeholder="Search...">
-      <button class="addPost" ng-click="showForm()">+ New Post</button>
+      <button class="addPost" ng-click="displayNewForm()">+ New Post</button>
     </nav>
   </div>
   <div class="container">
     <div class="row">
-      <form ng-show="form" name="newPost" ng-submit="addPost(post)">
-        <!-- {{ post | json }} -->
+      <form ng-show="showNewForm" name="newPost" ng-submit="addPost(post)">
         <div class="row">
         <div class="six columns">
           <label for="postTitle">Post Title</label>
-          <input required type="text" name="postTitle" ng-minlength="2" class="u-full-width" ng-model="post.postTitle" id="postTitle">
+          <input required type="text" name="postTitle" ng-minlength="2" class="u-full-width" ng-model="post.title" id="postTitle">
           <p class="error" ng-show="newPost.postTitle.$error.minlength">Title is too short.</p>
           <p class="error" ng-show="newPost.postTitle.$error.required">Title is required</p>
         </div>
         <div class="six columns">
-          <label for="posterName">Poster Name</label>
-          <input required type="text" class="u-full-width" ng-model="post.posterName" name="posterName" id="posterName">
-          <p class="error" ng-show="newPost.posterName.$error.required">Poster name is required</p>
+          <label for="posterName">Username</label>
+          <select class="u-full-width" ng-model="post.user_id">
+            <option ng-repeat="user in posts" value="{{user.user_id}}">{{ user.username }}
+            </option>
+          </select>
         </div>
         </div>
         <div class="row">
         <div class="six columns">
           <label for="postImg">Post Image</label>
-          <input required name="postImg" type="text" class="u-full-width" ng-model="post.postImg" placeholder="starts with http://">
+          <input required name="postImg" type="text" class="u-full-width" ng-model="post.image_url" placeholder="starts with http://">
           <p class="error" ng-show="newPost.postImg.$error.required">Image is required</p>
         </div>
         <div class="six columns">
           <label for="posterLoc">Poster Location</label>
-          <input required name="posterLoc" ng-minlength="2" type="text" class="u-full-width" ng-model="post.posterLoc" id="posterLoc">
+          <input required name="posterLoc" ng-minlength="2" type="text" class="u-full-width" ng-model="post.location" id="posterLoc">
           <p class="error" ng-show="newPost.posterLoc.$error.required">Location is required</p>
           <p class="error" ng-show="newPost.posterLoc.$error.minlength">Location is too short.</p>
         </div>
@@ -38,7 +39,7 @@
         <div class="row">
         <div class="twelve columns">
           <label for="postDescrip">Post Description</label>
-          <textarea required name="postDescrip" ng-minlength="5" ng-maxlength="200" ng-model="post.postDescrip" class="u-full-width"></textarea>
+          <textarea required name="postDescrip" ng-minlength="5" ng-maxlength="200" ng-model="post.content" class="u-full-width"></textarea>
           <p class="error" ng-show="newPost.postDescrip.$error.required">Description is required.</p>
           <p class="error" ng-show="newPost.postDescrip.$error.minlength">Description is too short.</p>
           <p class="error" ng-show="newPost.postDescrip.$error.maxlength">Description has exceeded limit</p>

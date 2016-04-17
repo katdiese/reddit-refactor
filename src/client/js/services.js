@@ -6,6 +6,10 @@ app.service('postService', ['crudService', function(crudService) {
         console.log(posts.data.data)
         return posts;
       })
+    },
+    addPost: function(post) {
+      console.log('something');
+      return crudService.addOne('api/posts', post);
     }
 
   }

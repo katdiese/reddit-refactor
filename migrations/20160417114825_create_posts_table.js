@@ -6,8 +6,8 @@ exports.up = function(knex, Promise) {
     table.dateTime('post_date').defaultTo('NOW');
     table.text('image_url');
     table.string('location');
-    table.integer('user_id');
-    table.integer('score');
+    table.integer('user_id').defaultTo(1);
+    table.integer('score').defaultTo(0);
   })
 
 };
