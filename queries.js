@@ -19,7 +19,7 @@ module.exports = {
   addPost: function(post) {
     return Posts().insert(post);
   },
-  addComment: function(post_id, user_id, comment) {
-    return Comments().insert({post_id: post_id, user_id: user_id, comment: comment});
+  addComment: function(post_id, comment) {
+    return Comments().insert({post_id: post_id, user_id: comment.user_id, comment: comment.comment});
   }
 }

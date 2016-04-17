@@ -10,6 +10,7 @@ app.controller('postsController', ['$scope', 'postService', function($scope, pos
   $scope.getAllPosts = function() {
     postService.getAllPosts()
     .then(function(posts) {
+      console.log(posts.data.data);
       $scope.posts = posts.data.data;
     })
   }
@@ -34,8 +35,8 @@ app.controller('postsController', ['$scope', 'postService', function($scope, pos
       });
   }
   }
-  $scope.addComment = function(user_id, comment, post_id) {
-    postService.addComment(user_id, comment, post_id)
+  $scope.addComment = function(post_id, comment) {
+    postService.addComment(post_id, comment)
     .then(function() {
       $scope.getComments(post_id);
       $scope.comment = {};
