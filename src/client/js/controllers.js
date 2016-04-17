@@ -2,7 +2,7 @@ app.controller('postsController', ['$scope', 'postService', function($scope, pos
   $scope.getAllPosts = function() {
     postService.getAllPosts()
     .then(function(posts) {
-      $scope.posts = posts;
+      $scope.posts = posts.data.data;
     })
   }
 

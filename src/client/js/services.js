@@ -3,7 +3,8 @@ app.service('postService', ['crudService', function(crudService) {
     getAllPosts: function() {
       return crudService.getAll('api')
       .then(function(posts) {
-        console.log(posts);
+        console.log(posts.data.data)
+        return posts;
       })
     }
 

@@ -49,15 +49,15 @@
     </div>
     <div class="singlePost row" ng-repeat="post in posts | orderBy: '-score' | filter:searchText">
       <div class="three columns">
-        <img class="postImg u-full-width" ng-src="{{ post.postImg }}" />
+        <img class="postImg u-full-width" ng-src="{{ post.image_url }}" />
       </div>
       <div class="nine columns">
         <p class="score">{{ post.score }}</p>
         <a ng-click="post.score = post.score + 1"><i class="score fa fa-arrow-up"></i></a>
         <a ng-click="post.score = post.score - 1"><i class="score fa fa-arrow-down"></i></a>
-        <h3 class="postTitle">{{ post.postTitle }}</h3>
-        <p class="descrip">{{ post.postDescrip }}</p>
-        <p>Submitted by: {{ post.posterName }} in {{ post.posterLoc }} on {{ post.postDate | date: "EEEE MMM d, yyyy 'at' h:mm:ss a" }}</p>
+        <h3 class="postTitle">{{ post.title }}</h3>
+        <p class="descrip">{{ post.content }}</p>
+        <p>Submitted by: {{ post.username }} in {{ post.location }} on {{ post.post_date | date: "EEEE MMM d, yyyy 'at' h:mm:ss a" }}</p>
         <a ng-click="showComments(post)">
         <i class="fa fa-comment"></i> {{post.comments.length}} comments
         </a>|
