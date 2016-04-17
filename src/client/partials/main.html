@@ -1,0 +1,81 @@
+<div class="row">
+    <nav>
+      <h1 class="appName">Reddit Clone</h1>
+      <input class="searchField" type="text" ng-model="searchText" placeholder="Search...">
+      <button class="addPost" ng-click="showForm()">+ New Post</button>
+    </nav>
+  </div>
+  <div class="container">
+    <div class="row">
+      <form ng-show="form" name="newPost" ng-submit="addPost(post)">
+        <!-- {{ post | json }} -->
+        <div class="row">
+        <div class="six columns">
+          <label for="postTitle">Post Title</label>
+          <input required type="text" name="postTitle" ng-minlength="2" class="u-full-width" ng-model="post.postTitle" id="postTitle">
+          <p class="error" ng-show="newPost.postTitle.$error.minlength">Title is too short.</p>
+          <p class="error" ng-show="newPost.postTitle.$error.required">Title is required</p>
+        </div>
+        <div class="six columns">
+          <label for="posterName">Poster Name</label>
+          <input required type="text" class="u-full-width" ng-model="post.posterName" name="posterName" id="posterName">
+          <p class="error" ng-show="newPost.posterName.$error.required">Poster name is required</p>
+        </div>
+        </div>
+        <div class="row">
+        <div class="six columns">
+          <label for="postImg">Post Image</label>
+          <input required name="postImg" type="text" class="u-full-width" ng-model="post.postImg" placeholder="starts with http://">
+          <p class="error" ng-show="newPost.postImg.$error.required">Image is required</p>
+        </div>
+        <div class="six columns">
+          <label for="posterLoc">Poster Location</label>
+          <input required name="posterLoc" ng-minlength="2" type="text" class="u-full-width" ng-model="post.posterLoc" id="posterLoc">
+          <p class="error" ng-show="newPost.posterLoc.$error.required">Location is required</p>
+          <p class="error" ng-show="newPost.posterLoc.$error.minlength">Location is too short.</p>
+        </div>
+        </div>
+        <div class="row">
+        <div class="twelve columns">
+          <label for="postDescrip">Post Description</label>
+          <textarea required name="postDescrip" ng-minlength="5" ng-maxlength="200" ng-model="post.postDescrip" class="u-full-width"></textarea>
+          <p class="error" ng-show="newPost.postDescrip.$error.required">Description is required.</p>
+          <p class="error" ng-show="newPost.postDescrip.$error.minlength">Description is too short.</p>
+          <p class="error" ng-show="newPost.postDescrip.$error.maxlength">Description has exceeded limit</p>
+        </div>
+        </div>
+        <button type="submit">Add New Post</button>
+      </form>
+    </div>
+    <div class="singlePost row" ng-repeat="post in posts | orderBy: '-score' | filter:searchText">
+      <div class="three columns">
+        <img class="postImg u-full-width" ng-src="{{ post.postImg }}" />
+      </div>
+      <div class="nine columns">
+        <p class="score">{{ post.score }}</p>
+        <a ng-click="post.score = post.score + 1"><i class="score fa fa-arrow-up"></i></a>
+        <a ng-click="post.score = post.score - 1"><i class="score fa fa-arrow-down"></i></a>
+        <h3 class="postTitle">{{ post.postTitle }}</h3>
+        <p class="descrip">{{ post.postDescrip }}</p>
+        <p>Submitted by: {{ post.posterName }} in {{ post.posterLoc }} on {{ post.postDate | date: "EEEE MMM d, yyyy 'at' h:mm:ss a" }}</p>
+        <a ng-click="showComments(post)">
+        <i class="fa fa-comment"></i> {{post.comments.length}} comments
+        </a>|
+        <a ng-click="showCommentsForm(post)">
+          <i class="fa fa-pencil-square-o"></i> Write New Comment
+        </a>
+        <div ng-show="post.commentsOpen">
+        <p class="comments" ng-repeat="comment in post.comments">
+          {{ comment.username }}: {{ comment.text }}
+        </p>
+        </div>
+        <form ng-show="post.commentsFormOpen" ng-submit="addComment(post,comment)">
+          <label for="username">Username</label>
+          <input type="text" class="u-full-width" id="username" ng-model="comment.username">
+          <label for="comment">Comment</label>
+          <textarea class="u-full-width" ng-model="comment.text"></textarea>
+          <button type="submit">Submit</button>
+        </form>
+      </div>
+    </div>
+  </div>
