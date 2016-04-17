@@ -29,11 +29,26 @@ router.get('/posts/:id', function(req, res, next) {
 });
 
 //POST new post
+router.post('/posts', function(req, res, next) {
+  queries.addPost(req.body)
+  .then(function(post) {
+    res.status(200)
+    .json(post[0]);
+  })
+})
 
 
 //POST new comment
+router.post('/posts/:id/comment', function(req, res, next) {
+  queries.addComment(req.body)
+  .then(function(comment) {
+    res.status(200)
+    .json(comment[0]);
+  })
+})
 
 //POST like
+
 
 
 
