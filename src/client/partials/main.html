@@ -62,16 +62,19 @@
         <a ng-click="showComments(post)">
         <i class="fa fa-comment"></i> {{post.comments.length}} comments
         </a>|
-        <a ng-click="showCommentsForm(post)">
+        <a ng-click="showComments()">
           <i class="fa fa-pencil-square-o"></i> Write New Comment
         </a>
-        <div ng-show="post.commentsOpen">
+        <div ng-show="comments">
         <p class="comments" ng-repeat="comment in post.comments">
           {{ comment.username }}: {{ comment.text }}
         </p>
         </div>
-        <form ng-show="post.commentsFormOpen" ng-submit="addComment(post,comment)">
-          <label for="username">Username</label>
+        <form ng-show="comments" ng-submit="addComment(post,comment)">
+          <select class="u-full-width" ng-model="comment.user_id">
+            <option ng-repeat="user in posts" value="{{user.user_id}}">{{ user.username }}
+            </option>
+          </select>
           <input type="text" class="u-full-width" id="username" ng-model="comment.username">
           <label for="comment">Comment</label>
           <textarea class="u-full-width" ng-model="comment.text"></textarea>

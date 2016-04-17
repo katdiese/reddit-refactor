@@ -3,7 +3,7 @@ exports.up = function(knex, Promise) {
     table.increments('post_id');
     table.string('title');
     table.text('content');
-    table.dateTime('post_date').defaultTo('NOW');
+    table.dateTime('post_date').defaultTo('NOW()');
     table.text('image_url');
     table.string('location');
     table.integer('user_id').defaultTo(1);
