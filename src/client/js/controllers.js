@@ -1,6 +1,7 @@
 app.controller('postsController', ['$scope', 'postService', function($scope, postService) {
   $scope.showNewForm = false;
   $scope.post = {};
+  $scope.commentsForm = false;
   $scope.comments = false;
   $scope.comment = {};
   $scope.displayNewForm = function() {
@@ -20,9 +21,16 @@ app.controller('postsController', ['$scope', 'postService', function($scope, pos
       $scope.getAllPosts();
     })
   }
-  $scope.showComments = function() {
-    console.log(this.comments);
+  $scope.showCommentsForm = function() {
+    this.commentsForm = !this.commentsForm;
+  }
+  $scope.getComments = function(id) {
     this.comments = !this.comments;
+    postService.getComments(id)
+    .then(function(comments) {
+      console.log(comments.data.data);
+      $scope.allComments = comments.data.data;
+    })
   }
 
   $scope.getAllPosts();

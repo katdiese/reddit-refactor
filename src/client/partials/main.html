@@ -59,23 +59,22 @@
         <h3 class="postTitle">{{ post.title }}</h3>
         <p class="descrip">{{ post.content }}</p>
         <p>Submitted by: {{ post.username }} in {{ post.location }} on {{ post.post_date | date: "EEEE MMM d, yyyy 'at' h:mm:ss a" }}</p>
-        <a ng-click="showComments(post)">
+        <a ng-click="getComments(post.post_id)">
         <i class="fa fa-comment"></i> {{post.comments.length}} comments
         </a>|
-        <a ng-click="showComments()">
+        <a ng-click="showCommentsForm()">
           <i class="fa fa-pencil-square-o"></i> Write New Comment
         </a>
         <div ng-show="comments">
-        <p class="comments" ng-repeat="comment in post.comments">
-          {{ comment.username }}: {{ comment.text }}
+        <p class="comments" ng-repeat="comment in allComments">
+          {{ comment.username }}: {{ comment.comment }}
         </p>
         </div>
-        <form ng-show="comments" ng-submit="addComment(post,comment)">
+        <form ng-show="commentsForm" ng-submit="addComment({{post.post_id}},comment)">
           <select class="u-full-width" ng-model="comment.user_id">
             <option ng-repeat="user in posts" value="{{user.user_id}}">{{ user.username }}
             </option>
           </select>
-          <input type="text" class="u-full-width" id="username" ng-model="comment.username">
           <label for="comment">Comment</label>
           <textarea class="u-full-width" ng-model="comment.text"></textarea>
           <button type="submit">Submit</button>

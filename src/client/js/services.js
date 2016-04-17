@@ -3,13 +3,18 @@ app.service('postService', ['crudService', function(crudService) {
     getAllPosts: function() {
       return crudService.getAll('api')
       .then(function(posts) {
-        console.log(posts.data.data)
         return posts;
       })
     },
     addPost: function(post) {
       console.log('something');
       return crudService.addOne('api/posts', post);
+    },
+    getComments: function(id) {
+      return crudService.getAll('api/posts/' + id)
+    },
+    addComment: function(id,comment) {
+      return crudService.addOne('/posts/' + id + '/comment')
     }
 
   }
