@@ -14,7 +14,7 @@ app.service('postService', ['crudService', function(crudService) {
       return crudService.getAll('api/posts/' + id)
     },
     addComment: function(id,comment) {
-      return crudService.addOne('/posts/' + id + '/comment')
+      return crudService.addOne('api/posts/' + id + '/comment', comment)
     }
 
   }

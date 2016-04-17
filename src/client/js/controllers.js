@@ -26,11 +26,20 @@ app.controller('postsController', ['$scope', 'postService', function($scope, pos
   }
   $scope.getComments = function(id) {
     this.comments = !this.comments;
-    postService.getComments(id)
-    .then(function(comments) {
-      console.log(comments.data.data);
-      $scope.allComments = comments.data.data;
-    })
+    if(this.comments === true) {
+      postService.getComments(id)
+      .then(function(comments) {
+        console.log(comments.data.data);
+        $scope.allComments = comments.data.data;
+      });
+  }
+  }
+  $scope.addComment = function(user_id, comment, post_id) {
+    postService.addComment(user_id, comment, post_id)
+    .then(function() {
+      $scope.getComments(post_id);
+      $scope.comment = {};
+    });
   }
 
   $scope.getAllPosts();

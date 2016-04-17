@@ -40,7 +40,7 @@ router.post('/posts', function(req, res, next) {
 
 //POST new comment
 router.post('/posts/:id/comment', function(req, res, next) {
-  queries.addComment(req.body)
+  queries.addComment(req.params.id, req.body.user_id, req.body.comment)
   .then(function(comment) {
     res.status(200)
     .json(comment[0]);

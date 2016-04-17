@@ -70,13 +70,13 @@
           {{ comment.username }}: {{ comment.comment }}
         </p>
         </div>
-        <form ng-show="commentsForm" ng-submit="addComment({{post.post_id}},comment)">
+        <form ng-show="commentsForm" ng-submit="addComment(post.user_id,comment,post.post_id)">
           <select class="u-full-width" ng-model="comment.user_id">
             <option ng-repeat="user in posts" value="{{user.user_id}}">{{ user.username }}
             </option>
           </select>
           <label for="comment">Comment</label>
-          <textarea class="u-full-width" ng-model="comment.text"></textarea>
+          <textarea class="u-full-width" ng-model="comment.comment"></textarea>
           <button type="submit">Submit</button>
         </form>
       </div>
