@@ -1,0 +1,31 @@
+[ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
+      display: none !important;
+    }
+.appName {
+  float: left;
+  margin: 10px;
+}
+.searchField, .addPost {
+  float: left;
+  margin: 15px;
+}
+.singlePost {
+  background-color: #D3D3D3;
+  margin: 2rem 0;
+  padding: 15px;
+  border-radius: 10px;
+}
+.descript {
+  display: block;
+  margin-left: 0;
+}
+.score {
+  float: right;
+  padding: 3px;
+}
+.error {
+  color: red;
+}
+a:hover {
+  cursor: pointer;
+}
